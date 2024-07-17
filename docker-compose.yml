@@ -1,0 +1,38 @@
+version: "3.9" 
+
+services:
+  rslogger-test-application:
+    build: 
+      context: .
+      dockerfile: docker/rsLoggerTestApplication/Dockerfile
+    env_file:
+      - .env
+    volumes: #A
+      - type: bind #A
+        source: ./rsLoggerTestApplication #A
+        target: /rsLoggerTestApplication #A
+    networks:
+      - rslogger_network
+    environment:
+      MYSQL_DATABASE: "${MYSQL_DATABASE}"
+      MYSQL_USER: "${MYSQL_USER}"
+      MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
+
+  mysql:
+    image: mysql:${MYSQL_VERSION:-latest}
+    restart: always
+    ports:
+      - "3316:3306"
+    volumes:
+            - ./mysql-data:/var/lib/mysql
+            - ./rsLoggerTestApplication/app/sql/initialData.sql:/docker-entrypoint-initdb.d/initialData.sql
+    networks:
+      - rslogger_network
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      MYSQL_DATABASE: "${MYSQL_DATABASE}"
+      MYSQL_USER: "${MYSQL_USER}"
+      MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
+
+networks:
+  rslogger_network:

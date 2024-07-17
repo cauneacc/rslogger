@@ -1,0 +1,9 @@
+{
+    "autoload": {
+        "psr-4": {"RsLogger\\": "RsLogger",
+        "RsApp\\": "app"}
+    },
+    "require": {
+        "phpunit/php-code-coverage": "^10.1"
+    }
+}

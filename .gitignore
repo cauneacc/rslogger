@@ -1,0 +1,5 @@
+mysql-data
+doc.md
+rsLoggerTestApplication/vendor
+rsLoggerTestApplication/logs/*
+.phpunit.result.cache
