@@ -1,34 +1,29 @@
-Am scris o biblioteca RsLogger care se afla in folderul rsLoggerTestApplication/RsLogger. Exista un driver, care se ocupa cu scrierea in mediul de stocare, un formatter, care formateaza mesajele, o clasa pentru configuratie, o clasa care reprezinta mesajul de logat si o clasa pentru crearea logger-ului.
+I wrote an RsLogger library that is located in the rsLoggerTestApplication/RsLogger folder. There is a driver, which deals with writing to the storage medium, a formatter, which formats the messages, a class for configuration, a class that represents the message to be logged and a class for creating the logger.
 
-Testele pentru biblioteca sunt in rsLoggerTestApplication/RsLogger/tests .
-Exemple de folosire a bibliotecii sunt in fisierul rsLoggerTestApplication/index.php
-Biblioteca poate scrie mesaje in standard output si intr-un fisier. 
-Am facut niste clase care scriu mesajele in mysql extinzand biblioteca, aceste clase sunt in rsLoggerTestApplication/app/lib/.
-Am facut ca aplicatia sa functioneze intr-un container de Docker. Exista si un container de mysql.
-
-Pentru a crea si porni containerele de Docker
+The tests for the library are in rsLoggerTestApplication/RsLogger/tests. Examples of using the library are in the file rsLoggerTestApplication/index.php The library can write messages in standard output and in a file. I made some classes that write the messages in mysql extending the library, these classes are in rsLoggerTestApplication/app/lib/. I made the application work in a Docker container. There is also a mysql container.
+To create and start Docker containers
 ```
 docker-compose up -d
 ```
 
-Pentru a rula comenzi de bash pe containerul cu aplicatia:
+To run bash commands on the application container:
 ```
 docker-compose exec rslogger-test-application bash
 ```
-Pentru a rula exemplele:
+To run the examples:
 ```
 php index.php
 ```
-Pentru a vizualiza logurile
+To view the logs
 ```
 cat logs/fileDriverExample.log
 cat logs/fileDriverJsonFormatterExampleConfiguration.log
 ```
-Pentru a rula clientul de mysql pe containerul de mysql rulati comanda de mai jos, parola este "rslogger".
+To run the mysql client on the mysql container, run the command below, the password is "rslogger".
 ```
 docker-compose exec mysql mysql -u rslogger -p rslogger
 ```
-Pentru a vedea ce s-a scris in tabelul log
+To see what was written in the log table
 ```
 select * from log;
 ```
